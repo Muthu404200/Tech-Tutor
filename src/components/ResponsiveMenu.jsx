@@ -29,7 +29,7 @@ const ResponsiveMenu = ({ isOpen, closeMenu }) => {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-40 bg-primary text-white"
+          className="fixed inset-0 z-40 bg-white text-black"
           initial={{ x: "100%" }}
           animate={{ x: 0 }}
           exit={{ x: "100%" }}
@@ -46,7 +46,7 @@ const ResponsiveMenu = ({ isOpen, closeMenu }) => {
                 key={i}
                 to={item.link}
                 onClick={closeMenu}
-                className="hover:text-accent transition"
+                className="hover:text-secondary transition"
               >
                 {item.title}
               </NavLink>

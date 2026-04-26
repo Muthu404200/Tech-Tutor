@@ -2,23 +2,23 @@ import { Routes, Route } from "react-router-dom";
 import Loader from "./components/Loader";
 import Home from "./components/Home";
 import AboutSection from "./components/AboutSection";
-import Footer from "./components/Footer";
-import Navbar from "./components/Navbar";
 import Courses from "./components/Courses";
 import Gallery from "./components/Gallery";
+import MainLayout from "./components/MainLayout";
 
 export default function App() {
   return (
-    <>
-    <Navbar />
     <Routes>
+      {/* Loader (No Navbar/Footer) */}
       <Route path="/" element={<Loader />} />
-      <Route path="/home" element={<Home />} />
-      <Route path="/about" element={<AboutSection />} />
-      <Route path="/courses" element={<Courses />} />
-      <Route path="/gallery" element={<Gallery />} />
+
+      {/* Pages with Navbar + Footer */}
+      <Route element={<MainLayout />}>
+        <Route path="/home" element={<Home />} />
+        <Route path="/about" element={<AboutSection />} />
+        <Route path="/courses" element={<Courses />} />
+        <Route path="/gallery" element={<Gallery />} />
+      </Route>
     </Routes>
-      <Footer />
-      </>
   );
 }

@@ -1,22 +1,24 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.svg";
 
 export default function Loader() {
   const [visible, setVisible] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // start fade-out a bit earlier
     const fadeTimer = setTimeout(() => setVisible(false), 4200);
+
     const redirectTimer = setTimeout(() => {
-      window.location.href = "/home";
+      navigate("/home"); // ✅ SPA navigation
     }, 5000);
 
     return () => {
       clearTimeout(fadeTimer);
       clearTimeout(redirectTimer);
     };
-  }, []);
+  }, [navigate]);
 
   return (
     <AnimatePresence>
@@ -62,7 +64,7 @@ export default function Loader() {
             />
           </motion.div>
 
-          {/* Brand Text */}
+          {/* Text */}
           <motion.p
             className="mt-8 text-sm sm:text-base text-gray-600 tracking-wide"
             initial={{ opacity: 0, y: 8 }}

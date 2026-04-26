@@ -24,7 +24,11 @@ const Navbar = () => {
           <NavLink to="/" className="flex items-center gap-3">
             <img src={logo} alt="Tech" className="w-10 h-10" />
             <div>
-              <p className="text-lg font-bold text-primary">Tech Tutor</p>
+              <p className="text-lg font-bold">
+                
+              <span className="text-xl text-primary">Tech</span>
+              <span className="text-xl text-secondary">Tutor</span>
+              </p>
               <p className="text-xs text-gray-500">IT Computer Education</p>
             </div>
           </NavLink>

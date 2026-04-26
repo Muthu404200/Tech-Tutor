@@ -18,8 +18,12 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center gap-2 font-bold">
               <img src={logo} alt="logo" className="w-20 h-20" />
-              <span className="text-xl text-red-600">Tech</span>
+              
+              <p className="text-lg font-bold">
+                
+              <span className="text-xl text-primary">Tech</span>
               <span className="text-xl text-secondary">Tutor</span>
+              </p>
             </div>
 
             <p className="text-sm text-gray-600 leading-relaxed">
@@ -65,7 +69,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <p className="text-center text-sm text-gray-500">
-          © {new Date().getFullYear()} Global Tech Computer Education.  
+          © {new Date().getFullYear()} Tech Tutor Computer Education.  
           All rights reserved.
         </p>
       </div>
