@@ -1,17 +1,47 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { MdClose } from "react-icons/md";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import emailjs from "@emailjs/browser";
 
 const ContactPopup = ({ isOpen, closePopup }) => {
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const form = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
 
-    // 👉 You can connect backend / email here
-    alert("Form Submitted Successfully!");
+    emailjs
+      .sendForm(
+        "service_b209vvi",     // 🔁 your service ID
+        "template_jo0uoru",    // 🔁 your template ID
+        form.current,
+        "MHvrTZ-bIKuAgOkyg" // 🔁 your public key
+      )
+      .then(
+        (result) => {
+          console.log("SUCCESS:", result.text);
+          setLoading(false);
+          setSuccess(true);
 
-    closePopup();
+          // reset form
+          form.current.reset();
+          setMessage("");
+
+          // auto close after 2 sec
+          setTimeout(() => {
+            setSuccess(false);
+            closePopup();
+          }, 2000);
+        },
+        (error) => {
+          console.error("ERROR:", error);
+          setLoading(false);
+          alert("❌ Failed: " + error.text);
+        }
+      );
   };
 
   return (
@@ -24,75 +54,95 @@ const ContactPopup = ({ isOpen, closePopup }) => {
           exit={{ opacity: 0 }}
         >
           <motion.div
-            className="relative w-full max-w-md sm:max-w-lg rounded-2xl bg-white p-6 sm:p-8 shadow-2xl"
-            initial={{ scale: 0.9, y: 30, opacity: 0 }}
-            animate={{ scale: 1, y: 0, opacity: 1 }}
-            exit={{ scale: 0.9, y: 30, opacity: 0 }}
+            className="relative w-full max-w-md sm:max-w-lg rounded-3xl bg-white/90 backdrop-blur-lg p-8 shadow-[0_10px_40px_rgba(0,0,0,0.2)]"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            {/* Close Button */}
+            {/* Close */}
             <button
               onClick={closePopup}
-              className="absolute top-4 right-4 text-2xl text-gray-500 hover:text-secondary transition"
+              className="absolute top-4 right-4 text-2xl text-gray-400 hover:text-red-500 transition"
             >
               <MdClose />
             </button>
 
-            {/* Title */}
-            <h2 className="text-xl sm:text-2xl font-semibold text-primary mb-1">
-              Send Enquiry By Email
-            </h2>
-
-            <p className="text-sm text-gray-500 mb-6">
-              To – TECH TUTOR IT EDUCATION INSTITUTE
-            </p>
-
-            {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-5">
-
-              <input
-                type="text"
-                placeholder="Name*"
-                required
-                className="w-full border-b border-gray-300 bg-transparent px-1 py-2 text-sm focus:border-secondary outline-none"
-              />
-
-              <input
-                type="tel"
-                placeholder="Mobile No.*"
-                required
-                className="w-full border-b border-gray-300 bg-transparent px-1 py-2 text-sm focus:border-secondary outline-none"
-              />
-
-              <input
-                type="email"
-                placeholder="Email ID*"
-                required
-                className="w-full border-b border-gray-300 bg-transparent px-1 py-2 text-sm focus:border-secondary outline-none"
-              />
-
-              <textarea
-                maxLength={500}
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Your Message*"
-                required
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm h-28 resize-none focus:border-secondary outline-none"
-              />
-
-              <div className="flex justify-between text-xs text-gray-400">
-                <span>* Required</span>
-                <span>{message.length}/500</span>
+            {/* Success Message */}
+            {success ? (
+              <div className="text-center py-10">
+                <h2 className="text-2xl font-bold text-green-600">
+                  ✅ Message Sent!
+                </h2>
+                <p className="text-gray-500 mt-2">
+                  We’ll contact you soon.
+                </p>
               </div>
+            ) : (
+              <>
+                {/* Title */}
+                <h2 className="text-2xl font-bold text-gray-800">
+                  Contact Us
+                </h2>
+                <p className="text-sm text-gray-500 mb-6">
+                  Send your enquiry to our team
+                </p>
 
-              <button
-                type="submit"
-                className="w-full rounded-lg bg-secondary py-3 text-sm font-semibold text-white hover:bg-primary transition"
-              >
-                Send
-              </button>
-            </form>
+                {/* Form */}
+                <form
+                  ref={form}
+                  onSubmit={handleSubmit}
+                  className="space-y-5"
+                >
+                  <input
+                    type="text"
+                    name="user_name"
+                    placeholder="Full Name"
+                    required
+                    className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
+                  />
 
+                  <input
+                    type="tel"
+                    name="user_phone"
+                    placeholder="Mobile Number"
+                    required
+                    className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
+                  />
+
+                  <input
+                    type="email"
+                    name="user_email"
+                    placeholder="Email Address"
+                    required
+                    className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
+                  />
+
+                  <textarea
+                    name="message"
+                    maxLength={500}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="Write your message..."
+                    required
+                    className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm h-28 resize-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
+                  />
+
+                  <div className="flex justify-between text-xs text-gray-400">
+                    <span>* Required</span>
+                    <span>{message.length}/500</span>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full rounded-xl bg-gradient-to-r from-secondary to-secondary py-3 text-sm font-semibold text-white shadow-md hover:scale-105 active:scale-95 transition disabled:opacity-60"
+                  >
+                    {loading ? "Sending..." : "Send Message"}
+                  </button>
+                </form>
+              </>
+            )}
           </motion.div>
         </motion.div>
       )}

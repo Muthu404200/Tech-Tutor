@@ -2,28 +2,28 @@ import { motion } from "framer-motion";
 
 const instructors = [
   {
-    name: "Rajesh Kumar",
-    role: "Classical Music Director",
-    img: "https://images.unsplash.com/photo-1531123414780-f74242c2b052?auto=format&fit=crop&w=500&q=80",
-    bio: "With over 20 years of experience in classical music, Rajesh has performed internationally and trained hundreds of students.",
+    name: "MOOVIN NATESH(B.Tech IT)",
+    role: "GRAPHIC DESIGNER",
+    img: "https://images.unsplash.com/vector-1776244476031-db2aa624a2a0?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    bio: "Creative graphic designer with 4+ years of experience crafting visually engaging designs, branding materials, and digital content for diverse clients.",
   },
   {
-    name: "Priya Singh",
-    role: "Dance Instructor",
-    img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&q=80",
-    bio: "Award-winning dancer specializing in classical and contemporary styles with years of teaching expertise.",
+    name: "Dinesh Kumar(B.E)",
+    role: "Hardware Network",
+    img: "https://images.unsplash.com/vector-1776244476031-db2aa624a2a0?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    bio: "Experienced hardware and networking specialist skilled in system installation, network configuration, troubleshooting, and maintaining secure IT infrastructures.",
   },
   {
-    name: "Vikram Mehta",
-    role: "Acting Coach",
-    img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80",
-    bio: "Veteran of stage and screen with 15+ years of experience mentoring aspiring actors.",
+    name: "SANDHIYA PRIYA (M.TECH IT)",
+    role: "SOFTWARE DEVELOPER",
+    img: "https://images.unsplash.com/vector-1776244476031-db2aa624a2a0?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    bio: "Professional software developer with strong expertise in building scalable applications, writing clean code, and mentoring students in modern programming technologies.",
   },
   {
-    name: "Aisha Kapoor",
-    role: "Photography Mentor",
-    img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=500&q=80",
-    bio: "Award-winning photographer specializing in portrait and fashion photography.",
+    name: "KANIMOZHI RAVICHANDRAN(B.E Csc)",
+    role: "Data Science",
+    img: "https://images.unsplash.com/vector-1776244476031-db2aa624a2a0?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    bio: "Data science professional skilled in data analysis, machine learning, and visualization, helping students turn data into meaningful insights and real-world solutions.",
   },
 ];
 
